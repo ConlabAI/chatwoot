@@ -11,7 +11,6 @@
 # It's strongly recommended that you check this file into your version control system.
 
 ActiveRecord::Schema.define(version: 2022_10_14_163047) do
-
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_stat_statements"
   enable_extension "pgcrypto"
@@ -148,6 +147,8 @@ ActiveRecord::Schema.define(version: 2022_10_14_163047) do
     t.datetime "updated_at", null: false
     t.string "fallback_title"
     t.string "extension"
+    t.index ["account_id"], name: "index_attachments_on_account_id"
+    t.index ["message_id"], name: "index_attachments_on_message_id"
   end
 
   create_table "automation_rules", force: :cascade do |t|
@@ -410,8 +411,10 @@ ActiveRecord::Schema.define(version: 2022_10_14_163047) do
     t.index ["account_id"], name: "index_conversations_on_account_id"
     t.index ["assignee_id", "account_id"], name: "index_conversations_on_assignee_id_and_account_id"
     t.index ["campaign_id"], name: "index_conversations_on_campaign_id"
+    t.index ["contact_id"], name: "index_conversations_on_contact_id"
     t.index ["contact_inbox_id"], name: "index_conversations_on_contact_inbox_id"
     t.index ["first_reply_created_at"], name: "index_conversations_on_first_reply_created_at"
+    t.index ["inbox_id"], name: "index_conversations_on_inbox_id"
     t.index ["last_activity_at"], name: "index_conversations_on_last_activity_at"
     t.index ["status", "account_id"], name: "index_conversations_on_status_and_account_id"
     t.index ["team_id"], name: "index_conversations_on_team_id"
