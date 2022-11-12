@@ -2,7 +2,8 @@ module AccessTokenAuthHelper
   BOT_ACCESSIBLE_ENDPOINTS = {
     'api/v1/accounts/conversations' => %w[toggle_status create],
     'api/v1/accounts/conversations/messages' => ['create'],
-    'api/v1/accounts/conversations/labels' => ['create']
+    'api/v1/accounts/conversations/labels' => ['create'],
+    'api/v1/accounts/canned_responses'  => ['create']
   }.freeze
 
   def ensure_access_token
