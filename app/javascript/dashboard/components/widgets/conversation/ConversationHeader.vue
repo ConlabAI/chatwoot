@@ -2,16 +2,9 @@
   <div class="conv-header">
     <div class="user">
       <back-button v-if="showBackButton" :back-url="backButtonUrl" />
-      <Thumbnail
-        :src="currentContact.thumbnail"
-        size="40px"
-        :badge="inboxBadge"
-        :username="currentContact.name"
-        :status="currentContact.availability_status"
-      />
       <div class="user--profile__meta">
         <h3 class="user--name text-truncate">
-          <span class="margin-right-smaller">{{ currentContact.name }}</span>
+          <span class="margin-right-smaller">{{ currentContact.id }}</span>
           <fluent-icon
             v-if="!isHMACVerified"
             v-tooltip="$t('CONVERSATION.UNVERIFIED_SESSION')"

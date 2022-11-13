@@ -3,7 +3,7 @@
     <div class="column content-box">
       <woot-modal-header
         :header-title="
-          `${$t('EDIT_CONTACT.TITLE')} - ${contact.name || contact.email}`
+          `${$t('EDIT_CONTACT.TITLE')} - ${contact.id || contact.email}`
         "
         :header-content="$t('EDIT_CONTACT.DESC')"
       />
