@@ -21,15 +21,6 @@
         @change="onSelectConversation($event.target.checked)"
       />
     </label>
-    <thumbnail
-      v-if="bulkActionCheck"
-      :src="currentContact.thumbnail"
-      :badge="inboxBadge"
-      class="columns"
-      :username="currentContact.name"
-      :status="currentContact.availability_status"
-      size="40px"
-    />
     <div class="conversation--details columns">
       <div class="conversation--metadata">
         <inbox-name v-if="showInboxName" :inbox="inbox" />
@@ -42,7 +33,7 @@
         </span>
       </div>
       <h4 class="conversation--user">
-        {{ currentContact.name }}
+        {{ currentContact.id }}
       </h4>
       <p v-if="lastMessageInChat" class="conversation--message">
         <fluent-icon
