@@ -3,7 +3,7 @@ module AccessTokenAuthHelper
     'api/v1/accounts/conversations' => %w[toggle_status create],
     'api/v1/accounts/conversations/messages' => ['create'],
     'api/v1/accounts/conversations/labels' => ['create'],
-    'api/v1/accounts/canned_responses'  => ['create']
+    'api/v1/accounts/canned_responses'  => ['index']
   }.freeze
 
   def ensure_access_token
