@@ -128,6 +128,7 @@ export default {
                       to={`/app/accounts/${this.$route.params.accountId}/contacts/${row.id}`}
                       class="user-name"
                     >
+                      {this.$t('APP_GLOBAL.CONTACT')}
                       {row.id}
                     </router-link>
                   </h6>

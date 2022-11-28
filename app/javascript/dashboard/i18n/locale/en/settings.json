@@ -124,7 +124,8 @@
     "ACCOUNT_SUSPENDED": {
       "TITLE": "Account Suspended",
       "MESSAGE": "Your account is suspended. Please reach out to the support team for more information."
-    }
+    },
+    "CONTACT": "Contact #"
   },
   "COMPONENTS": {
     "CODE": {
