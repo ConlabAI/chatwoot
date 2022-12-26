@@ -37,7 +37,7 @@
               v-for="conversation in conversations"
               :key="conversation.messageId"
               :conversation-id="conversation.id"
-              :user-name="conversation.contact.name"
+              :user-id="conversation.contact.id"
               :timestamp="conversation.created_at"
               :messages="conversation.messages"
               :search-term="searchTerm"

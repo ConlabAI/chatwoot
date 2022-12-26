@@ -33,7 +33,7 @@
         </span>
       </div>
       <h4 class="conversation--user">
-        {{ currentContact.id }}
+        {{ $t('APP_GLOBAL.CONTACT') }}{{ currentContact.id }}
       </h4>
       <p v-if="lastMessageInChat" class="conversation--message">
         <fluent-icon

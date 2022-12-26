@@ -4,7 +4,7 @@
       <div class="contact--details">
         <div v-if="showAvatar" class="contact--name-wrap">
           <h3 class="sub-block-title contact--name">
-            {{ contact.id }}
+            {{ $t('APP_GLOBAL.CONTACT') }}{{ contact.id }}
           </h3>
           <a
             :href="contactProfileLink"

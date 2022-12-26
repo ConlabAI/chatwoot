@@ -4,8 +4,10 @@
       <back-button v-if="showBackButton" :back-url="backButtonUrl" />
       <div class="user--profile__meta">
         <h3 class="user--name text-truncate">
-          <span class="margin-right-smaller">{{ currentContact.id }}</span>
-          <fluent-icon
+          <span class="margin-right-smaller"
+            >{{ $t('APP_GLOBAL.CONTACT') }}{{ currentContact.id }}</span
+          >
+          <fluent-i con
             v-if="!isHMACVerified"
             v-tooltip="$t('CONVERSATION.UNVERIFIED_SESSION')"
             size="14"
