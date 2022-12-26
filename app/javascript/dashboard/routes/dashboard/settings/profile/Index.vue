@@ -97,24 +97,6 @@
     </div>
     <change-password v-if="!globalConfig.disableUserProfileUpdate" />
     <notification-settings />
-    <div class="profile--settings--row row">
-      <div class="columns small-3">
-        <h4 class="block-title">
-          {{ $t('PROFILE_SETTINGS.FORM.ACCESS_TOKEN.TITLE') }}
-        </h4>
-        <p>
-          {{
-            useInstallationName(
-              $t('PROFILE_SETTINGS.FORM.ACCESS_TOKEN.NOTE'),
-              globalConfig.installationName
-            )
-          }}
-        </p>
-      </div>
-      <div class="columns small-9 medium-5">
-        <woot-code :script="currentUser.access_token" />
-      </div>
-    </div>
   </div>
 </template>
 
