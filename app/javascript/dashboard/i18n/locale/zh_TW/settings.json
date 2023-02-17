@@ -58,9 +58,20 @@
       "AUDIO_NOTIFICATIONS_SECTION": {
         "TITLE": "音效通知",
         "NOTE": "Enable audio notifications in dashboard for new messages and conversations.",
-        "NONE": "無",
-        "ASSIGNED": "已指派的對話",
-        "ALL_CONVERSATIONS": "所有對話"
+        "ALERT_TYPE": {
+          "TITLE": "Alert events:",
+          "NONE": "無",
+          "ASSIGNED": "已指派的對話",
+          "ALL_CONVERSATIONS": "所有對話"
+        },
+        "DEFAULT_TONE": {
+          "TITLE": "Alert tone:"
+        },
+        "CONDITIONS": {
+          "TITLE": "Alert conditions:",
+          "CONDITION_ONE": "Send audio alerts only if the browser window is not active",
+          "CONDITION_TWO": "Send alerts every 30s until all the assigned conversations are read"
+        }
       },
       "EMAIL_NOTIFICATIONS_SECTION": {
         "TITLE": "電子信箱通知",
@@ -136,6 +147,7 @@
     "SELECTOR_SUBTITLE": "從以下列表中選擇一個帳戶",
     "PROFILE_SETTINGS": "個人資料設定",
     "KEYBOARD_SHORTCUTS": "Keyboard Shortcuts",
+    "SUPER_ADMIN_CONSOLE": "Super Admin Console",
     "LOGOUT": "退出登入"
   },
   "APP_GLOBAL": {
@@ -150,7 +162,7 @@
   "COMPONENTS": {
     "CODE": {
       "BUTTON_TEXT": "複製",
-      "COPY_SUCCESSFUL": "代碼複製到剪貼簿成功"
+      "COPY_SUCCESSFUL": "Copied to clipboard"
     },
     "SHOW_MORE_BLOCK": {
       "SHOW_MORE": "Show More",
@@ -158,7 +170,8 @@
     },
     "FILE_BUBBLE": {
       "DOWNLOAD": "下載",
-      "UPLOADING": "上傳中..."
+      "UPLOADING": "上傳中...",
+      "INSTAGRAM_STORY_UNAVAILABLE": "This story is no longer available."
     },
     "LOCATION_BUBBLE": {
       "SEE_ON_MAP": "See on map"
@@ -270,6 +283,7 @@
     }
   },
   "KEYBOARD_SHORTCUTS": {
+    "TOGGLE_MODAL": "View all shortcuts",
     "TITLE": {
       "OPEN_CONVERSATION": "開啟對話",
       "RESOLVE_AND_NEXT": "Resolve and move to next",

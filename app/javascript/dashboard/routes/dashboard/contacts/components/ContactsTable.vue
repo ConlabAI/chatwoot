@@ -65,11 +65,11 @@ export default {
     },
     sortParam: {
       type: String,
-      default: 'name',
+      default: 'last_activity_at',
     },
     sortOrder: {
       type: String,
-      default: 'asc',
+      default: 'desc',
     },
   },
   data() {
@@ -91,6 +91,7 @@ export default {
         // as it simplier the sort attribute calculation
         const additional = item.additional_attributes || {};
         const { last_activity_at: lastActivityAt } = item;
+        const { created_at: createdAt } = item;
         return {
           ...item,
           phone_number: item.phone_number || '---',
@@ -103,6 +104,7 @@ export default {
           last_activity_at: lastActivityAt
             ? this.dynamicTime(lastActivityAt)
             : '---',
+          created_at: createdAt ? this.dynamicTime(createdAt) : '---',
         };
       });
     },
@@ -236,6 +238,13 @@ export default {
           key: 'last_activity_at',
           sortBy: this.sortConfig.last_activity_at || '',
           title: this.$t('CONTACTS_PAGE.LIST.TABLE_HEADER.LAST_ACTIVITY'),
+          align: 'left',
+        },
+        {
+          field: 'created_at',
+          key: 'created_at',
+          sortBy: this.sortConfig.created_at || '',
+          title: this.$t('CONTACTS_PAGE.LIST.TABLE_HEADER.CREATED_AT'),
           align: 'left',
         },
         {

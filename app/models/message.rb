@@ -32,6 +32,7 @@
 
 class Message < ApplicationRecord
   include MessageFilterHelpers
+  include Liquidable
   NUMBER_OF_PERMITTED_ATTACHMENTS = 15
 
   before_validation :ensure_content_type
@@ -57,7 +58,8 @@ class Message < ApplicationRecord
     form: 6,
     article: 7,
     incoming_email: 8,
-    input_csat: 9
+    input_csat: 9,
+    integrations: 10
   }
   enum status: { sent: 0, delivered: 1, read: 2, failed: 3 }
   # [:submitted_email, :items, :submitted_values] : Used for bot message types
@@ -67,7 +69,8 @@ class Message < ApplicationRecord
   # [:external_created_at] : Can specify if the message was created at a different timestamp externally
   # [:external_error : Can specify if the message creation failed due to an error at external API
   store :content_attributes, accessors: [:submitted_email, :items, :submitted_values, :email, :in_reply_to, :deleted,
-                                         :external_created_at, :story_sender, :story_id, :external_error], coder: JSON
+                                         :external_created_at, :story_sender, :story_id, :external_error,
+                                         :translations], coder: JSON
 
   store :external_source_ids, accessors: [:slack], coder: JSON, prefix: :external_source_id
 
@@ -104,10 +107,12 @@ class Message < ApplicationRecord
       created_at: created_at.to_i,
       message_type: message_type_before_type_cast,
       conversation_id: conversation.display_id,
-      conversation: { assignee_id: conversation.assignee_id }
+      conversation: {
+        assignee_id: conversation.assignee_id,
+        unread_count: conversation.unread_incoming_messages.count
+      }
     )
     data.merge!(echo_id: echo_id) if echo_id.present?
-    validate_instagram_story if instagram_story_mention?
     data.merge!(attachments: attachments.map(&:push_event_data)) if attachments.present?
     merge_sender_attributes(data)
   end
