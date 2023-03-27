@@ -186,6 +186,14 @@ export default {
       type: Boolean,
       default: true,
     },
+    showCloseButton: {
+      type: Boolean,
+      default: true,
+    },
+    closeIconName: {
+      type: String,
+      default: 'chevron-right',
+    },
   },
   data() {
     return {
@@ -235,6 +243,9 @@ export default {
     },
     toggleEditModal() {
       this.showEditModal = !this.showEditModal;
+    },
+    onPanelToggle() {
+      this.$emit('toggle-panel');
     },
     toggleConversationModal() {
       this.showConversationModal = !this.showConversationModal;
@@ -287,10 +298,6 @@ export default {
   position: relative;
   align-items: flex-start;
   padding: var(--space-normal);
-
-  .user-thumbnail-box {
-    margin-right: var(--space-normal);
-  }
 }
 
 .contact--details {
@@ -302,6 +309,12 @@ export default {
   text-align: left;
 }
 
+.contact-info--header {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+}
+
 .contact--name-wrap {
   display: flex;
   align-items: center;
@@ -311,7 +324,7 @@ export default {
 .contact--name {
   text-transform: capitalize;
   white-space: normal;
-  margin: 0 var(--space-smaller) 0 0;
+  margin: 0 var(--space-smaller) 0 var(--space-smaller);
 
   a {
     color: var(--color-body);
@@ -338,9 +351,10 @@ export default {
     margin-right: var(--space-small);
   }
 }
-.merege-summary--card {
+.merge-summary--card {
   padding: var(--space-normal);
 }
+
 .contact--bio {
   word-wrap: break-word;
 }

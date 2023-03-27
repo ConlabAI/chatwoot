@@ -112,6 +112,7 @@ import globalConfigMixin from 'shared/mixins/globalConfigMixin';
 import uiSettingsMixin, {
   isEditorHotKeyEnabled,
 } from 'dashboard/mixins/uiSettings';
+import MaskedText from 'dashboard/components/MaskedText.vue';
 import PreviewCard from 'dashboard/components/ui/PreviewCard.vue';
 
 export default {
@@ -120,6 +121,7 @@ export default {
     ChangePassword,
     MessageSignature,
     PreviewCard,
+    MaskedText,
   },
   mixins: [alertMixin, globalConfigMixin, uiSettingsMixin],
   data() {
