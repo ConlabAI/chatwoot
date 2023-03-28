@@ -8,7 +8,6 @@ name: Publish Chatwoot CE docker images
 on:
   push:
     branches:
-      - develop
       - master
     tags:
       - v*
@@ -40,12 +39,12 @@ jobs:
 
       - name: set docker tag
         run: |
-          echo "DOCKER_TAG=chatwoot/chatwoot:$GIT_REF-ce" >> $GITHUB_ENV
+          echo "DOCKER_TAG=conlab/chatwoot:$GIT_REF-ce" >> $GITHUB_ENV
 
       - name: replace docker tag if master
         if: github.ref_name == 'master'
         run: |
-          echo "DOCKER_TAG=chatwoot/chatwoot:latest-ce" >> $GITHUB_ENV
+          echo "DOCKER_TAG=conlab/chatwoot:latest-ce" >> $GITHUB_ENV
 
       - name: Login to DockerHub
         uses: docker/login-action@v1
