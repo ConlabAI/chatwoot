@@ -1,8 +1,7 @@
 <template>
   <router-link :to="navigateTo" class="contact-item">
-    <woot-thumbnail :src="thumbnail" :username="name" size="24px" />
     <div class="contact-details">
-      <h5 class="text-block-title name">{{ name }}</h5>
+      <h5 class="text-block-title name">Contact #{{id}}</h5>
       <p class="details-meta">
         <span v-if="email" class="email">{{ email }}</span>
         <span v-if="phone" class="separator">•</span>
