@@ -50,6 +50,7 @@
             icon="call"
             emoji="📞"
             :title="$t('CONTACT_PANEL.PHONE_NUMBER')"
+            show-copy
           />
           <contact-info-row
             v-if="contact.identifier"
@@ -92,7 +93,6 @@
           @click="toggleEditModal"
         />
         <woot-button
-          v-if="isAdmin"
           v-tooltip="$t('CONTACT_PANEL.MERGE_CONTACT')"
           title="$t('CONTACT_PANEL.MERGE_CONTACT')"
           class="merge-contact"
