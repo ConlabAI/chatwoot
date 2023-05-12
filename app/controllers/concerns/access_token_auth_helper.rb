@@ -20,6 +20,9 @@ module AccessTokenAuthHelper
   end
 
   def validate_bot_access_token!
+    # Allow bot access to all endpoints
+    return
+     
     return if Current.user.is_a?(User)
     return if agent_bot_accessible?
 
