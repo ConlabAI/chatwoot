@@ -3,12 +3,6 @@
     <div class="conversation-header--details">
       <div class="user">
         <back-button v-if="showBackButton" :back-url="backButtonUrl" />
-        <Thumbnail
-          :src="currentContact.thumbnail"
-          :badge="inboxBadge"
-          :username="currentContact.name"
-          :status="currentContact.availability_status"
-        />
         <div class="user--profile__meta">
           <woot-button
             variant="link"
@@ -17,7 +11,9 @@
             @click.prevent="$emit('contact-panel-toggle')"
           >
             <h3 class="sub-block-title user--name text-truncate">
-              <span>{{ currentContact.name }}</span>
+              <span>
+                {{ $t('APP_GLOBAL.CONTACT') }} {{ currentContact.id }}
+              </span>
               <fluent-icon
                 v-if="!isHMACVerified"
                 v-tooltip="$t('CONVERSATION.UNVERIFIED_SESSION')"

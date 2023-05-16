@@ -98,6 +98,7 @@ Rails.application.routes.draw do
               post :unread
               post :custom_attributes
               get :attachments
+              patch :custom_attributes, to: 'conversations#patch_custom_attributes'
             end
           end
 

@@ -22,7 +22,7 @@
       </div>
       <h5 v-if="name" class="text-block-title name">
         <span class="pre-text">from:</span>
-        {{ name }}
+        Contact #{{id}}
       </h5>
       <slot />
     </div>

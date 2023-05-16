@@ -1,7 +1,9 @@
 module AccessTokenAuthHelper
   BOT_ACCESSIBLE_ENDPOINTS = {
     'api/v1/accounts/conversations' => %w[toggle_status create],
-    'api/v1/accounts/conversations/messages' => ['create']
+    'api/v1/accounts/conversations/messages' => ['create'],
+    'api/v1/accounts/conversations/labels' => ['index', 'create'],
+    'api/v1/accounts/canned_responses'  => ['index']
   }.freeze
 
   def ensure_access_token
@@ -18,6 +20,9 @@ module AccessTokenAuthHelper
   end
 
   def validate_bot_access_token!
+    # Allow bot access to all endpoints
+    return
+     
     return if Current.user.is_a?(User)
     return if agent_bot_accessible?
 

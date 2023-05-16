@@ -1,26 +1,10 @@
 <template>
   <div class="contact--profile">
     <div class="contact--info">
-      <div class="contact-info--header">
-        <thumbnail
-          v-if="showAvatar"
-          :src="contact.thumbnail"
-          size="56px"
-          :username="contact.name"
-          :status="contact.availability_status"
-        />
-        <woot-button
-          v-if="showCloseButton"
-          :icon="closeIconName"
-          class="clear secondary close-button--rtl"
-          @click="onPanelToggle"
-        />
-      </div>
-
       <div class="contact--details">
         <div v-if="showAvatar" class="contact--name-wrap">
           <h3 class="sub-block-title contact--name">
-            {{ contact.name }}
+            {{ $t('APP_GLOBAL.CONTACT') }}{{ contact.id }}
           </h3>
           <fluent-icon
             v-if="contact.created_at"

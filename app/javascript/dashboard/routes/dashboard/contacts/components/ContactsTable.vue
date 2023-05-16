@@ -31,7 +31,6 @@ import { VeTable } from 'vue-easytable';
 import { getCountryFlag } from 'dashboard/helper/flag';
 
 import Spinner from 'shared/components/Spinner.vue';
-import Thumbnail from 'dashboard/components/widgets/Thumbnail.vue';
 import EmptyState from 'dashboard/components/widgets/EmptyState.vue';
 import timeMixin from 'dashboard/mixins/time';
 import rtlMixin from 'shared/mixins/rtlMixin';
@@ -126,19 +125,14 @@ export default {
               onClick={() => this.onClickContact(row.id)}
             >
               <div class="row--user-block">
-                <Thumbnail
-                  src={row.thumbnail}
-                  size="32px"
-                  username={row.name}
-                  status={row.availability_status}
-                />
                 <div class="user-block">
                   <h6 class="sub-block-title text-truncate">
                     <router-link
                       to={`/app/accounts/${this.$route.params.accountId}/contacts/${row.id}`}
                       class="user-name"
                     >
-                      {row.name}
+                      {this.$t('APP_GLOBAL.CONTACT')}
+                      {row.id}
                     </router-link>
                   </h6>
                   <button class="button clear small link view-details--button">
@@ -302,10 +296,7 @@ export default {
     text-align: left;
 
     .user-block {
-      align-items: flex-start;
-      display: flex;
-      flex-direction: column;
-      margin: 0 var(--space-small);
+      min-width: 0;
     }
 
     .user-name {
