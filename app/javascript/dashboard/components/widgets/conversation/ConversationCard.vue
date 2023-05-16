@@ -24,13 +24,16 @@
     <div class="conversation--details columns">
       <div class="conversation--metadata">
         <inbox-name v-if="showInboxName" :inbox="inbox" />
-        <span
-          v-if="showAssignee && assignee.name"
-          class="label assignee-label text-truncate"
-        >
-          <fluent-icon icon="person" size="12" />
-          {{ assignee.name }}
-        </span>
+        <div class="conversation-metadata-attributes">
+          <span
+            v-if="showAssignee && assignee.name"
+            class="label assignee-label text-truncate"
+          >
+            <fluent-icon icon="person" size="12" />
+            {{ assignee.name }}
+          </span>
+          <priority-mark :priority="chat.priority" />
+        </div>
       </div>
       <h4 class="conversation--user">
         {{ $t('APP_GLOBAL.CONTACT') }}{{ currentContact.id }}
@@ -97,12 +100,14 @@
       <conversation-context-menu
         :status="chat.status"
         :inbox-id="inbox.id"
+        :priority="chat.priority"
         :has-unread-messages="hasUnread"
         @update-conversation="onUpdateConversation"
         @assign-agent="onAssignAgent"
         @assign-label="onAssignLabel"
         @assign-team="onAssignTeam"
         @mark-as-unread="markAsUnread"
+        @assign-priority="assignPriority"
       />
     </woot-context-menu>
   </div>
@@ -122,6 +127,7 @@ import ConversationContextMenu from './contextMenu/Index.vue';
 import alertMixin from 'shared/mixins/alertMixin';
 import TimeAgo from 'dashboard/components/ui/TimeAgo';
 import CardLabels from './conversationCardComponents/CardLabels.vue';
+import PriorityMark from './PriorityMark.vue';
 const ATTACHMENT_ICONS = {
   image: 'image',
   audio: 'headphones-sound-wave',
@@ -138,6 +144,7 @@ export default {
     Thumbnail,
     ConversationContextMenu,
     TimeAgo,
+    PriorityMark,
   },
 
   mixins: [
@@ -361,6 +368,10 @@ export default {
       this.$emit('mark-as-unread', this.chat.id);
       this.closeContextMenu();
     },
+    async assignPriority(priority) {
+      this.$emit('assign-priority', priority, this.chat.id);
+      this.closeContextMenu();
+    },
   },
 };
 </script>
@@ -420,9 +431,14 @@ export default {
     padding: var(--space-micro) 0 var(--space-micro) 0;
   }
 
+  .conversation-metadata-attributes {
+    display: flex;
+    gap: var(--space-small);
+    margin-left: var(--space-small);
+  }
+
   .assignee-label {
     display: inline-flex;
-    margin-left: var(--space-small);
     max-width: 50%;
   }
 }
