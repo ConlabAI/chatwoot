@@ -28,11 +28,12 @@
         </div>
 
         <div class="medium-12">
-          <input v-model="hidden" type="checkbox" :value="hidden" />
+          <input v-model="isPrivate" type="checkbox" :value="isPrivate" />
           <label for="conversation_creation">
-            {{ $t('TEAMS_SETTINGS.FORM.HIDDEN.LABEL') }}
+            {{ $t('TEAMS_SETTINGS.FORM.PRIVATE.LABEL') }}
           </label>
         </div>
+
         <div class="modal-footer">
           <div class="medium-12 columns">
             <woot-submit-button
@@ -80,14 +81,14 @@ export default {
       description = '',
       name: title = '',
       allow_auto_assign: allowAutoAssign = true,
-      hidden: hidden = false,
+      private: isPrivate = false,
     } = formData;
 
     return {
       description,
       title,
       allowAutoAssign,
-      hidden,
+      isPrivate,
     };
   },
   validations,
@@ -101,7 +102,7 @@ export default {
         description: this.description,
         name: this.title,
         allow_auto_assign: this.allowAutoAssign,
-        hidden: this.hidden,
+        private: this.isPrivate,
       });
     },
   },
