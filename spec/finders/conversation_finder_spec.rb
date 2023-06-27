@@ -192,6 +192,7 @@ describe ConversationFinder do
 
   describe '#perform filtering by team' do
     let(:team) { create(:team, account: account, private: true) }
+
     let(:params) { { team_id: team.id } }
 
     before do
