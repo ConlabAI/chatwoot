@@ -10,7 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+<<<<<<< HEAD
 ActiveRecord::Schema[7.0].define(version: 2023_06_12_103936) do
+=======
+ActiveRecord::Schema[7.0].define(version: 2023_06_25_204438) do
+>>>>>>> c91508bd1 (feature/7398 private or restricted teams)
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_stat_statements"
   enable_extension "pg_trgm"
@@ -861,7 +865,11 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_12_103936) do
     t.bigint "account_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+<<<<<<< HEAD
     t.boolean "hidden", default: false, null: false
+=======
+    t.boolean "private", default: false, null: false
+>>>>>>> c91508bd1 (feature/7398 private or restricted teams)
     t.index ["account_id"], name: "index_teams_on_account_id"
     t.index ["name", "account_id"], name: "index_teams_on_name_and_account_id", unique: true
   end

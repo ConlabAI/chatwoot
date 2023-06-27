@@ -124,6 +124,7 @@ class ConversationFinder
   end
 
   def filter_by_team
+<<<<<<< HEAD
     if current_user.current_account_user.role == 'administrator'
       @conversations = @team ? @conversations.where(team: @team) : @conversations
       return
@@ -141,6 +142,9 @@ class ConversationFinder
       arel = @conversations.arel_table
       @conversations.where(arel[:team_id].not_in(excluded_team_its).or(arel[:team_id].eq(nil)))
     end
+=======
+    @conversations = TeamFilter.new(@conversations, current_user, @team).filter
+>>>>>>> c91508bd1 (feature/7398 private or restricted teams)
   end
 
   def filter_by_labels
