@@ -9,7 +9,7 @@ on:
   push:
     branches:
       - develop
-      - master
+      - conlab-master
     tags:
       - v*
   workflow_dispatch:
