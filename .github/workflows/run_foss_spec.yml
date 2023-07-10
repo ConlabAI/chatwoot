@@ -9,7 +9,7 @@ on:
   push:
     branches:
       - develop
-      - master
+      - conlab-master
   pull_request:
   workflow_dispatch:
 

@@ -8,7 +8,7 @@ name: Publish Chatwoot CE docker images
 on:
   push:
     branches:
-      - master
+      - conlab-master
     tags:
       - v*
   pull_request:
