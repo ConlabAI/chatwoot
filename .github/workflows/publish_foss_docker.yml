@@ -39,9 +39,9 @@ jobs:
         run: |
           echo -en '\nENV CW_EDITION="ce"' >> docker/Dockerfile
 
-      - name: set docker tag
-        run: |
-          echo "DOCKER_TAG=conlab/chatwoot:$GIT_REF" >> $GITHUB_ENV
+      # - name: set docker tag
+      #   run: |
+      #     echo "DOCKER_TAG=conlab/chatwoot:$GIT_REF" >> $GITHUB_ENV
 
       - name: replace docker tag if conlab-master
         if: github.ref_name == 'conlab-master'
