@@ -43,8 +43,8 @@ jobs:
         run: |
           echo "DOCKER_TAG=conlab/chatwoot:$GIT_REF" >> $GITHUB_ENV
 
-      - name: replace docker tag if master
-        if: github.ref_name == 'master'
+      - name: replace docker tag if conlab-master
+        if: github.ref_name == 'conlab-master'
         run: |
           echo "DOCKER_TAG=conlab/chatwoot:latest" >> $GITHUB_ENV
 
