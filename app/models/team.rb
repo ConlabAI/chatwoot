@@ -5,7 +5,6 @@
 #  id                :bigint           not null, primary key
 #  allow_auto_assign :boolean          default(TRUE)
 #  description       :text
-#  hidden            :boolean          default(FALSE), not null
 #  name              :string           not null
 #  private           :boolean          default(FALSE), not null
 #  created_at        :datetime         not null

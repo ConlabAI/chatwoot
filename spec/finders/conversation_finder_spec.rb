@@ -117,14 +117,14 @@ describe ConversationFinder do
     end
 
     context 'filter by team' do
-      let(:team) { create(:team, account: account, hidden: true) }
+      let(:team) { create(:team, account: account, private: true) }
       let(:params) { { } }
 
       before do
         create(:conversation, account: account, inbox: inbox, team: team)
       end
 
-      it 'exclude conversations of hidden teams' do
+      it 'exclude conversations of private teams' do
         result = conversation_finder.perform
         expect(result[:conversations].length).to be 4
       end
@@ -132,7 +132,7 @@ describe ConversationFinder do
       context 'admin' do
         let!(:user_1) { create(:user, account: account, role: :administrator) }
 
-        it 'does not exclude conversations of hidden teams' do
+        it 'does not exclude conversations of private teams' do
           result = conversation_finder.perform
           expect(result[:conversations].length).to be 5
         end
