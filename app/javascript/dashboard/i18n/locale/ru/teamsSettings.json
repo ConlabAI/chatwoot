@@ -119,13 +119,8 @@
       "AUTO_ASSIGN": {
         "LABEL": "Разрешить автоматическое назначение для этой команды."
       },
-<<<<<<< HEAD
-      "HIDDEN": {
-        "LABEL": "Скрыть."
-=======
       "PRIVATE": {
         "LABEL": "Приватная."
->>>>>>> b01f6244c (feature/7398 private or restricted teams)
       },
       "SUBMIT_CREATE": "Создать команду"
     }
