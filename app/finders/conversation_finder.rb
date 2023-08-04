@@ -124,27 +124,7 @@ class ConversationFinder
   end
 
   def filter_by_team
-<<<<<<< HEAD
-    if current_user.current_account_user.role == 'administrator'
-      @conversations = @team ? @conversations.where(team: @team) : @conversations
-      return
-    end
-
-    excluded_team_its = Team.where(account_id: Account.first.id, hidden: true).pluck(:id) - current_user.teams.pluck(:id)
-
-    @conversations = if @team
-      if excluded_team_its.to_set === @team.id
-        raise Pundit::NotAuthorizedError
-      else
-        @conversations.where(team: @team)
-      end
-    else
-      arel = @conversations.arel_table
-      @conversations.where(arel[:team_id].not_in(excluded_team_its).or(arel[:team_id].eq(nil)))
-    end
-=======
     @conversations = TeamFilter.new(@conversations, current_user, @team).filter
->>>>>>> c91508bd1 (feature/7398 private or restricted teams)
   end
 
   def filter_by_labels
