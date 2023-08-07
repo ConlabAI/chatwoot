@@ -41,8 +41,7 @@ jobs:
 
       - name: set docker tag
         run: |
-          BRANCH_REPLACED=$(echo $GIT_REF | sed 's/\//-/g')
-          echo "DOCKER_TAG=conlab/chatwoot:$BRANCH_REPLACED" >> $GITHUB_ENV
+          echo "DOCKER_TAG=conlab/chatwoot:$GIT_REF" >> $GITHUB_ENV
 
       - name: replace docker tag if conlab-master
         if: github.ref_name == 'conlab-master'
