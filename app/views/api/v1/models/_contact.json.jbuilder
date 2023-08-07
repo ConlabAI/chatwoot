@@ -1,11 +1,11 @@
 json.additional_attributes resource.additional_attributes
 json.availability_status resource.availability_status
-json.email resource.email
+json.email resource.anonymized_email
 json.id resource.id
-json.name resource.name
-json.phone_number resource.phone_number
+json.name resource.anonymized_name
+json.phone_number resource.anonymized_phone_number
 json.identifier resource.identifier
-json.thumbnail resource.avatar_url
+json.thumbnail resource.anonymized_avatar_url
 json.custom_attributes resource.custom_attributes
 json.conversations_count resource.conversations_count if resource[:conversations_count].present?
 json.last_activity_at resource.last_activity_at.to_i if resource[:last_activity_at].present?

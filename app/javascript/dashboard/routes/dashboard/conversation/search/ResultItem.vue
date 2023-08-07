@@ -6,7 +6,7 @@
         <div class="conversation">
           <div class="user-wrap">
             <div class="name-wrap">
-              <span class="sub-block-title">{{ $t('APP_GLOBAL.CONTACT') }}{{ userId }}</span>
+              <span class="sub-block-title">{{ userName }}</span>
             </div>
             <woot-label
               :title="conversationsId"
@@ -46,10 +46,6 @@ export default {
     conversationId: {
       type: Number,
       default: 0,
-    },
-    userId: {
-      type: String,
-      default: '',
     },
     userName: {
       type: String,

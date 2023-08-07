@@ -1,10 +1,17 @@
 <template>
   <div class="contact--profile">
     <div class="contact--info">
+      <thumbnail
+        v-if="showAvatar"
+        :src="contact.thumbnail"
+        size="56px"
+        :username="contact.name"
+        :status="contact.availability_status"
+      />
       <div class="contact--details">
         <div v-if="showAvatar" class="contact--name-wrap">
           <h3 class="sub-block-title contact--name">
-            {{ $t('APP_GLOBAL.CONTACT') }}{{ contact.id }}
+            {{ contact.name }}
           </h3>
           <fluent-icon
             v-if="contact.created_at"
@@ -176,7 +183,11 @@ export default {
   props: {
     contact: {
       type: Object,
-      default: () => ({}),
+      default: () => ({
+        account: {
+          anonymized: false,
+        },
+      }),
     },
     channelType: {
       type: String,

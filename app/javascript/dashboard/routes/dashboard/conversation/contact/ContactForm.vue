@@ -2,6 +2,28 @@
   <form class="contact--form" @submit.prevent="handleSubmit">
     <div class="row">
       <div class="columns">
+        <woot-avatar-uploader
+          :label="$t('CONTACT_FORM.FORM.AVATAR.LABEL')"
+          :src="avatarUrl"
+          :username-avatar="name"
+          :delete-avatar="!!avatarUrl"
+          class="settings-item"
+          @change="handleImageUpload"
+          @onAvatarDelete="handleAvatarDelete"
+        />
+      </div>
+    </div>
+    <div class="row">
+      <div class="columns">
+        <label :class="{ error: $v.name.$error }">
+          {{ $t('CONTACT_FORM.FORM.NAME.LABEL') }}
+          <input
+            v-model.trim="name"
+            type="text"
+            :placeholder="$t('CONTACT_FORM.FORM.NAME.PLACEHOLDER')"
+            @input="$v.name.$touch"
+          />
+        </label>
         <label :class="{ error: $v.email.$error }">
           {{ $t('CONTACT_FORM.FORM.EMAIL_ADDRESS.LABEL') }}
           <input
@@ -127,7 +149,7 @@ import {
   DuplicateContactException,
   ExceptionWithMessage,
 } from 'shared/helpers/CustomErrors';
-import { required, email } from 'vuelidate/lib/validators';
+import { email } from 'vuelidate/lib/validators';
 import countries from 'shared/constants/countries.js';
 import { isPhoneNumberValid } from 'shared/helpers/Validators';
 import parsePhoneNumber from 'libphonenumber-js';

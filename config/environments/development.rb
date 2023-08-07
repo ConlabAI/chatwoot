@@ -34,7 +34,12 @@ Rails.application.configure do
 
   config.active_job.queue_adapter = :sidekiq
 
-  Rails.application.routes.default_url_options = { host: ENV['FRONTEND_URL'] }
+  # Rails.application.routes.default_url_options = { host: ENV['FRONTEND_URL'] }
+
+  Rails.application.routes.default_url_options = {
+    host: '127.0.0.1',
+    port: 3000
+  }
 
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log
@@ -61,7 +66,12 @@ Rails.application.configure do
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
 
   # Disable host check during development
-  config.hosts = nil
+  # config.hosts = nil
+  config.hosts << "localhost"
+  config.hosts << "127.0.0.1"
+
+  config.action_controller.asset_host = 'http://127.0.0.1:3000'
+  config.active_storage.service_url = 'http://127.0.0.1:3000'
 
   # customize using the environment variables
   config.log_level = ENV.fetch('LOG_LEVEL', 'debug').to_sym

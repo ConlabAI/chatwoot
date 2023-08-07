@@ -40,4 +40,13 @@ environment.config.set('output.filename', chunkData => {
     : 'js/[name]-[hash].js';
 });
 
+// environment.config.merge({
+//   resolve: {
+//     extensions: ['.js', '.vue', '.json'],
+//     alias: {
+//       'crypto$': 'crypto-browserify'
+//     }
+//   }
+// })
+
 module.exports = environment;

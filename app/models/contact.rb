@@ -145,6 +145,22 @@ class Contact < ApplicationRecord
     email_format
   end
 
+  def anonymized_name
+    account.anonymized ? Anonymization.anonymize_name(name, id) : name
+  end
+
+  def anonymized_email
+    account.anonymized ? Anonymization.anonymize_email(email, id) : email
+  end
+
+  def anonymized_phone_number
+    account.anonymized ? Anonymization.anonymize_phone(phone_number, id) : phone_number
+  end
+
+  def anonymized_avatar_url
+    account.anonymized ? Anonymization.anonymize_avatar_url(id) : avatar_url
+  end
+
   private
 
   def ip_lookup

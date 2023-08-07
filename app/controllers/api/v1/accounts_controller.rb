@@ -22,6 +22,7 @@ class Api::V1::AccountsController < Api::BaseController
   def create
     @user, @account = AccountBuilder.new(
       account_name: account_params[:account_name],
+      anonymized: account_params[:anonymized],
       user_full_name: account_params[:user_full_name],
       email: account_params[:email],
       user_password: account_params[:password],
@@ -42,7 +43,7 @@ class Api::V1::AccountsController < Api::BaseController
   end
 
   def update
-    @account.update!(account_params.slice(:name, :locale, :domain, :support_email, :auto_resolve_duration))
+    @account.update!(account_params.slice(:name, :anonymized, :locale, :domain, :support_email, :auto_resolve_duration))
   end
 
   def update_active_at
@@ -67,7 +68,10 @@ class Api::V1::AccountsController < Api::BaseController
   end
 
   def account_params
-    params.permit(:account_name, :email, :name, :password, :locale, :domain, :support_email, :auto_resolve_duration, :user_full_name)
+    params.permit(:account_name, :email, :name,
+                  :password, :locale, :domain,
+                  :support_email, :auto_resolve_duration, :user_full_name,
+                  :anonymized)
   end
 
   def check_signup_enabled

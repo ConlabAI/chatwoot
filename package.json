@@ -42,6 +42,7 @@
     "@sindresorhus/slugify": "1.1.0",
     "@tailwindcss/typography": "0.2.0",
     "activestorage": "^5.2.6",
+    "avatar-initials": "^6.0.0",
     "axios": "^0.21.2",
     "babel-plugin-syntax-jsx": "^6.18.0",
     "babel-plugin-transform-vue-jsx": "^3.7.0",
