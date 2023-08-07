@@ -120,8 +120,8 @@
       "AUTO_ASSIGN": {
         "LABEL": "Allow auto assign for this team."
       },
-      "PRIVATE": {
-        "LABEL": "Private."
+      "HIDDEN": {
+        "LABEL": "Hidden."
       },
       "SUBMIT_CREATE": "Create team"
     }
