@@ -8,7 +8,6 @@ name: Publish Chatwoot CE docker images
 on:
   push:
     branches:
-      - develop
       - conlab-master
     tags:
       - v*
@@ -63,3 +62,12 @@ jobs:
           platforms: linux/amd64
           push: true
           tags: ${{ env.DOCKER_TAG }}
+
+  deploy-dev-server:
+    needs: build
+    if: (github.event_name == 'push' || github.event_name == 'pull_request') && github.ref == 'refs/heads/conlab-master'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Call webhook for deployment
+        run: |
+          curl -X POST -H "Content-Type: application/json" -d '{"event":"deploy", "branch":"${{ github.ref }}"}' ${{ secrets.DEPLOY_TO_DEV_WEBHOOK_URL }} 
