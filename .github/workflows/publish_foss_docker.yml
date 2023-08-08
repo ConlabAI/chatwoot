@@ -68,6 +68,7 @@ jobs:
           tags: ${{ env.DOCKER_TAG }}
           cache-from: type=local,src=/tmp/.buildx-cache
           cache-to: type=local,dest=/tmp/.buildx-cache,mode=max
+          build-args: --progress=plain
 
   deploy-dev-server:
     needs: build
