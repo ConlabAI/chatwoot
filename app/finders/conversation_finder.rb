@@ -124,7 +124,7 @@ class ConversationFinder
   end
 
   def filter_by_team
-    @conversations = TeamFilter.new(@conversations, current_user, @team).filter
+    @conversations = TeamFilter.new(@conversations, current_user, current_account, @team).filter
   end
 
   def filter_by_labels

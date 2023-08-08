@@ -1,7 +1,8 @@
 class TeamFilter
-  def initialize(conversations, current_user, team)
+  def initialize(conversations, current_user, current_account, team)
     @conversations = conversations
     @current_user = current_user
+    @current_account = current_account
     @team = team
   end
 
@@ -31,6 +32,6 @@ class TeamFilter
 
   def excluded_team_ids
     current_user_team_ids = @current_user.teams.pluck(:id)
-    Team.where(account_id: Account.first.id, private: true).pluck(:id) - current_user_team_ids
+    Team.where(account_id: @current_account, private: true).pluck(:id) - current_user_team_ids
   end
 end

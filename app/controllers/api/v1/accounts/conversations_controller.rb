@@ -27,7 +27,10 @@ class Api::V1::Accounts::ConversationsController < Api::V1::Accounts::BaseContro
     @attachments = @conversation.attachments
   end
 
-  def show; end
+  def show
+    team_id = @conversation.team_id
+    raise Pundit::NotAuthorizedError if team_id.present? && Current.user.teams.pluck(:id).exclude?(team_id)
+  end
 
   def create
     ActiveRecord::Base.transaction do
