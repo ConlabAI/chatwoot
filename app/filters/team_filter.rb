@@ -1,5 +1,5 @@
 class TeamFilter
-  def initialize(conversations, current_user, current_account, team)
+  def initialize(conversations, current_user, current_account, team=nil)
     @conversations = conversations
     @current_user = current_user
     @current_account = current_account

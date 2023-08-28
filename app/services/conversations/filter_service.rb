@@ -49,7 +49,8 @@ class Conversations::FilterService < FilterService
   end
 
   def base_relation
-    Current.account.conversations.left_outer_joins(:labels)
+    conversations = Current.account.conversations.left_outer_joins(:labels)
+    TeamFilter.new(conversations, @user, @account).filter
   end
 
   def current_page
