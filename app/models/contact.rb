@@ -146,22 +146,26 @@ class Contact < ApplicationRecord
   end
 
   def anonymized_name
-    account.anonymized ? Anonymization.anonymize_name(name, id) : name
+    anonymize? ? Anonymization.anonymize_name(name, id) : name
   end
 
   def anonymized_email
-    account.anonymized ? Anonymization.anonymize_email(email, id) : email
+    anonymize? ? Anonymization.anonymize_email(email, id) : email
   end
 
   def anonymized_phone_number
-    account.anonymized ? Anonymization.anonymize_phone(phone_number, id) : phone_number
+    anonymize? ? Anonymization.anonymize_phone(phone_number, id) : phone_number
   end
 
   def anonymized_avatar_url
-    account.anonymized ? Anonymization.anonymize_avatar_url(id) : avatar_url
+    anonymize? ? Anonymization.anonymize_avatar_url(id) : avatar_url
   end
 
   private
+
+  def anonymize?
+    account.anonymized && !Current.account_user&.administrator?
+  end
 
   def ip_lookup
     return unless account.feature_enabled?('ip_lookup')
