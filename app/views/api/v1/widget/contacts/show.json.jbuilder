@@ -1,5 +1,5 @@
 json.id @contact.id
-json.name @contact.name
-json.email @contact.email
-json.phone_number @contact.phone_number
-json.identifier @contact.identifier
+json.name @contact.anonymized_name
+json.email @contact.anonymized_email
+json.phone_number @contact.anonymized_phone_number
+json.identifier @contact.anonymized_identifier

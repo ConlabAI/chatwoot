@@ -146,14 +146,26 @@ class Contact < ApplicationRecord
   end
 
   def anonymized_name
+    return if name.blank?
+
     anonymize? ? Anonymization.anonymize_name(name, id) : name
   end
 
+  def anonymized_identifier
+    return '' if identifier.blank?
+
+    anonymize? ? Anonymization.anonymize_name(identifier, id) : identifier
+  end
+
   def anonymized_email
+    return '' if email.blank?
+
     anonymize? ? Anonymization.anonymize_email(email, id) : email
   end
 
   def anonymized_phone_number
+    return '' if phone_number.blank?
+
     anonymize? ? Anonymization.anonymize_phone(phone_number, id) : phone_number
   end
 

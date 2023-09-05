@@ -4,7 +4,7 @@ json.email resource.anonymized_email
 json.id resource.id
 json.name resource.anonymized_name
 json.phone_number resource.anonymized_phone_number
-json.identifier resource.identifier
+json.identifier resource.anonymized_identifier
 json.thumbnail resource.anonymized_avatar_url
 json.custom_attributes resource.custom_attributes
 json.conversations_count resource.conversations_count if resource[:conversations_count].present?
