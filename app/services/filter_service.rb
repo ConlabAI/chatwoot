@@ -6,9 +6,10 @@ class FilterService
     date: 'date', text: 'text', number: 'numeric', link: 'text', list: 'text', checkbox: 'boolean'
   }.with_indifferent_access
 
-  def initialize(params, user)
+  def initialize(params, user, account=nil)
     @params = params
     @user = user
+    @account = account
     file = File.read('./lib/filters/filter_keys.json')
     @filters = JSON.parse(file)
     @query_string = ''

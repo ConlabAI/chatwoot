@@ -117,14 +117,14 @@ describe ConversationFinder do
     end
 
     context 'filter by team' do
-      let(:team) { create(:team, account: account, hidden: true) }
+      let(:team) { create(:team, account: account, private: true) }
       let(:params) { { } }
 
       before do
         create(:conversation, account: account, inbox: inbox, team: team)
       end
 
-      it 'exclude conversations of hidden teams' do
+      it 'exclude conversations of private teams' do
         result = conversation_finder.perform
         expect(result[:conversations].length).to be 4
       end
@@ -132,7 +132,7 @@ describe ConversationFinder do
       context 'admin' do
         let!(:user_1) { create(:user, account: account, role: :administrator) }
 
-        it 'does not exclude conversations of hidden teams' do
+        it 'does not exclude conversations of private teams' do
           result = conversation_finder.perform
           expect(result[:conversations].length).to be 5
         end
@@ -186,6 +186,56 @@ describe ConversationFinder do
         create_list(:conversation, 25, account: account, inbox: inbox, assignee: user_1)
         result = conversation_finder.perform
         expect(result[:conversations].length).to be 25
+      end
+    end
+  end
+
+  describe '#perform filtering by team' do
+    let(:team) { create(:team, account: account, private: true) }
+    let(:params) { { team_id: team.id } }
+
+    before do
+      create(:conversation, account: account, inbox: inbox, team: team)
+    end
+
+    context 'when team is public' do
+      let(:team) { create(:team, account: account, private: false) }
+
+      it 'filters conversations by team' do
+        result = conversation_finder.perform
+        expect(result[:conversations].length).to be 1
+      end
+    end
+
+    context 'when team is private' do
+      it 'allows a team member to see a private team conversation' do
+        create(:team_member, user: user_1, team: team)
+
+        result = conversation_finder.perform
+        expect(result[:conversations].length).to be 1
+      end
+
+      it 'throws exception on trying to access private team for non-member' do
+        expect { conversation_finder.perform }.to raise_error(Pundit::NotAuthorizedError)
+      end
+    end
+
+    context 'when user is a member of another team' do
+      let(:params) { {} }
+
+      it 'excludes conversations of private teams' do
+        result = conversation_finder.perform
+        expect(result[:conversations].length).to be 4
+      end
+    end
+
+    context 'when user is admin' do
+      let(:user_1) { create(:user, account: account, role: :administrator) }
+      let(:params) { {} }
+
+      it 'does not exclude conversations of private teams for admin' do
+        result = conversation_finder.perform
+        expect(result[:conversations].length).to be 5
       end
     end
   end
