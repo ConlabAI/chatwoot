@@ -18,7 +18,7 @@ RSpec.describe 'Accounts API', type: :request do
         with_modified_env ENABLE_ACCOUNT_SIGNUP: 'true' do
           allow(account_builder).to receive(:perform).and_return([user, account])
 
-          params = { account_name: 'test', email: email, user: nil, locale: nil, user_full_name: user_full_name, password: 'Password1!' }
+          params = { account_name: 'test', anonymized: nil, email: email, user: nil, locale: nil, user_full_name: user_full_name, password: 'Password1!' }
 
           post api_v1_accounts_url,
                params: params,
@@ -55,7 +55,7 @@ RSpec.describe 'Accounts API', type: :request do
         with_modified_env ENABLE_ACCOUNT_SIGNUP: 'true' do
           allow(account_builder).to receive(:perform).and_return(nil)
 
-          params = { account_name: nil, email: nil, user: nil, locale: 'en', user_full_name: nil }
+          params = { account_name: nil, anonymized: nil, email: nil, user: nil, locale: 'en', user_full_name: nil }
 
           post api_v1_accounts_url,
                params: params,
@@ -84,7 +84,7 @@ RSpec.describe 'Accounts API', type: :request do
 
     context 'when ENABLE_ACCOUNT_SIGNUP env variable is set to api_only' do
       it 'does not respond 404 on requests' do
-        params = { account_name: 'test', email: email, user_full_name: user_full_name, password: 'Password1!' }
+        params = { account_name: 'test', anonymized: false, email: email, user_full_name: user_full_name, password: 'Password1!' }
         with_modified_env ENABLE_ACCOUNT_SIGNUP: 'api_only' do
           post api_v1_accounts_url,
                params: params,
