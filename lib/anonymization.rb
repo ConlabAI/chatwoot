@@ -14,10 +14,13 @@ module Anonymization
   end
 
   def self.anonymize_name(name, user_id)
-    rng = Random.new(Digest::MD5.hexdigest(user_id.to_s).to_i(16))
-    # For simplicity, we'll use only lowercase letters for the name
-    # Assuming the name is a single word, you may need to adjust for multi-word names
-    Array.new(name.length) { ('a'..'z').to_a[rng.rand(26)] }.join
+    Faker::Config.locale = 'ru'
+    Faker::Config.random = Random.new(Digest::MD5.hexdigest(user_id.to_s).to_i(16))
+
+    first_name = Faker::Name.first_name
+    last_name = Faker::Name.last_name
+
+    "#{first_name} #{last_name}"
   end
 
   def self.anonymize_avatar_url(id)

@@ -176,7 +176,7 @@ class Contact < ApplicationRecord
   private
 
   def anonymize?
-    account.anonymized && !Current.account_user&.administrator?
+    account.anonymized
   end
 
   def ip_lookup
