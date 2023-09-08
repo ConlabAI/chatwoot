@@ -17,8 +17,8 @@ module Anonymization
     Faker::Config.locale = 'ru'
     Faker::Config.random = Random.new(Digest::MD5.hexdigest(user_id.to_s).to_i(16))
 
-    first_name = Faker::Name.first_name
-    last_name = Faker::Name.last_name
+    first_name = Faker::Name.male_first_name
+    last_name = Faker::Name.male_last_name
 
     "#{first_name} #{last_name}"
   end
