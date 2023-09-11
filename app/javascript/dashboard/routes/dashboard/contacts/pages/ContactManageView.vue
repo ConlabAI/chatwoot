@@ -2,7 +2,7 @@
   <div class="view-box columns bg-white">
     <settings-header
       button-route="new"
-      :header-title="`${$t('APP_GLOBAL.CONTACT')}${contact.id}`"
+      :header-title="`${contact.name}`"
       show-back-button
       :back-button-label="$t('CONTACT_PROFILE.BACK_BUTTON')"
       :back-url="backUrl"

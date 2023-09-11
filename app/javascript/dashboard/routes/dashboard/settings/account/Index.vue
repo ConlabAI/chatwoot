@@ -79,6 +79,15 @@
               {{ $t('GENERAL_SETTINGS.FORM.AUTO_RESOLVE_DURATION.ERROR') }}
             </span>
           </label>
+
+          <label>
+            <input
+              v-model="anonymized"
+              type="checkbox"
+              :value="anonymized"
+            />
+            Anonymized
+          </label>
         </div>
       </div>
 
@@ -137,6 +146,7 @@ export default {
     return {
       id: '',
       name: '',
+      anonymized: false,
       locale: 'en',
       domain: '',
       supportEmail: '',
@@ -222,6 +232,7 @@ export default {
         await this.$store.dispatch('accounts/get');
         const {
           name,
+          anonymized,
           locale,
           id,
           domain,
@@ -233,6 +244,7 @@ export default {
 
         this.$root.$i18n.locale = locale;
         this.name = name;
+        this.anonymized = anonymized;
         this.locale = locale;
         this.id = id;
         this.domain = domain;
@@ -255,6 +267,7 @@ export default {
         await this.$store.dispatch('accounts/update', {
           locale: this.locale,
           name: this.name,
+          anonymized: this.anonymized,
           domain: this.domain,
           support_email: this.supportEmail,
           auto_resolve_duration: this.autoResolveDuration,

@@ -3,6 +3,7 @@
 # Table name: accounts
 #
 #  id                    :integer          not null, primary key
+#  anonymized            :boolean          default(FALSE), not null
 #  auto_resolve_duration :integer
 #  custom_attributes     :jsonb
 #  domain                :string(100)
