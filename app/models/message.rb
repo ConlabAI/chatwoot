@@ -160,8 +160,16 @@ class Message < ApplicationRecord
   end
 
   def merge_sender_attributes(data)
-    data.merge!(sender: sender.push_event_data) if sender && !sender.is_a?(AgentBot)
-    data.merge!(sender: sender.push_event_data(inbox)) if sender.is_a?(AgentBot)
+    if sender
+      if sender.is_a?(AgentBot)
+        data.merge!(sender: sender.push_event_data(inbox))
+      elsif sender.is_a?(User)
+        data.merge!(sender: sender.push_event_data(false))
+      else
+        data.merge!(sender: sender.push_event_data)
+      end
+    end
+
     data
   end
 

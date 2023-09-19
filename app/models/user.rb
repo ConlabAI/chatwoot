@@ -126,15 +126,15 @@ class User < ApplicationRecord
     super(options).merge(confirmed: confirmed?)
   end
 
-  def push_event_data
+  def push_event_data(anonymize = true)
     {
       id: id,
-      name: anonymized_name,
-      available_name: anonymized_available_name,
-      avatar_url: anonymized_avatar_url,
+      name: anonymize ? anonymized_name : name,
+      available_name: anonymize ? anonymized_available_name: available_name,
+      avatar_url: anonymize ? anonymized_avatar_url : avatar_url,
       type: 'user',
       availability_status: availability_status,
-      thumbnail: anonymized_avatar_url
+      thumbnail: anonymize ? anonymized_avatar_url: avatar_url,
     }
   end
 

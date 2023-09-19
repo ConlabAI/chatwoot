@@ -10,5 +10,11 @@ json.content_attributes message.content_attributes
 json.created_at message.created_at.to_i
 json.private message.private
 json.source_id message.source_id
-json.sender message.sender.push_event_data if message.sender
+if message.sender
+  if message.sender.is_a?(User)
+    json.sender message.sender.push_event_data(false)
+  else
+    json.sender message.sender.push_event_data
+  end
+end
 json.attachments message.attachments.map(&:push_event_data) if message.attachments.present?
