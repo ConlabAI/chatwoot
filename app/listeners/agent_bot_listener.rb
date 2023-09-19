@@ -5,7 +5,7 @@ class AgentBotListener < BaseListener
     return unless connected_agent_bot_exist?(inbox)
 
     event_name = __method__.to_s
-    payload = conversation.webhook_data.merge(event: event_name)
+    payload = conversation.webhook_data(false).merge(event: event_name)
     process_webhook_bot_event(inbox.agent_bot, payload)
   end
 
@@ -15,7 +15,7 @@ class AgentBotListener < BaseListener
     return unless connected_agent_bot_exist?(inbox)
 
     event_name = __method__.to_s
-    payload = conversation.webhook_data.merge(event: event_name)
+    payload = conversation.webhook_data(false).merge(event: event_name)
     process_webhook_bot_event(inbox.agent_bot, payload)
   end
 

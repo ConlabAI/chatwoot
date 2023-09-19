@@ -180,7 +180,7 @@ class Message < ApplicationRecord
       content_attributes: content_attributes,
       content_type: content_type,
       content: content,
-      conversation: conversation.webhook_data,
+      conversation: conversation.webhook_data(false),
       created_at: created_at,
       id: id,
       inbox: inbox.webhook_data,
