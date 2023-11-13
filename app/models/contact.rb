@@ -107,7 +107,7 @@ class Contact < ApplicationRecord
     contact_inboxes.find_by!(inbox_id: inbox_id).source_id
   end
 
-  def push_event_data
+  def push_event_data(*params) # compatibility
     {
       additional_attributes: additional_attributes,
       custom_attributes: custom_attributes,
