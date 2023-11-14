@@ -107,16 +107,16 @@ class Contact < ApplicationRecord
     contact_inboxes.find_by!(inbox_id: inbox_id).source_id
   end
 
-  def push_event_data
+  def push_event_data(*params) # compatibility
     {
       additional_attributes: additional_attributes,
       custom_attributes: custom_attributes,
-      email: email,
+      email: anonymized_name,
       id: id,
-      identifier: identifier,
-      name: name,
-      phone_number: phone_number,
-      thumbnail: avatar_url,
+      identifier: anonymized_identifier,
+      name: anonymized_name,
+      phone_number: anonymized_phone_number,
+      thumbnail: anonymized_avatar_url,
       type: 'contact'
     }
   end
@@ -125,14 +125,14 @@ class Contact < ApplicationRecord
     {
       account: account.webhook_data,
       additional_attributes: additional_attributes,
-      avatar: avatar_url,
+      avatar: anonymized_avatar_url,
       custom_attributes: custom_attributes,
-      email: email,
+      email: anonymized_email,
       id: id,
-      identifier: identifier,
-      name: name,
-      phone_number: phone_number,
-      thumbnail: avatar_url
+      identifier: anonymized_identifier,
+      name: anonymized_name,
+      phone_number: anonymized_phone_number,
+      thumbnail: anonymized_avatar_url
     }
   end
 
@@ -148,13 +148,13 @@ class Contact < ApplicationRecord
   def anonymized_name
     return if name.blank?
 
-    anonymize? ? Anonymization.anonymize_name(name, id) : name
+    anonymize? ? Anonymization.anonymize_name(id) : name
   end
 
   def anonymized_identifier
     return '' if identifier.blank?
 
-    anonymize? ? Anonymization.anonymize_name(identifier, id) : identifier
+    anonymize? ? Anonymization.anonymize_name(id) : identifier
   end
 
   def anonymized_email

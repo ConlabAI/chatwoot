@@ -44,28 +44,28 @@ class ActionCableListener < BaseListener
     conversation, account = extract_conversation_and_account(event)
     tokens = user_tokens(account, conversation.inbox.members) + contact_inbox_tokens(conversation.contact_inbox)
 
-    broadcast(account, tokens, CONVERSATION_CREATED, conversation.push_event_data)
+    broadcast(account, tokens, CONVERSATION_CREATED, conversation.push_event_data(false))
   end
 
   def conversation_read(event)
     conversation, account = extract_conversation_and_account(event)
     tokens = user_tokens(account, conversation.inbox.members)
 
-    broadcast(account, tokens, CONVERSATION_READ, conversation.push_event_data)
+    broadcast(account, tokens, CONVERSATION_READ, conversation.push_event_data(false))
   end
 
   def conversation_status_changed(event)
     conversation, account = extract_conversation_and_account(event)
     tokens = user_tokens(account, conversation.inbox.members) + contact_inbox_tokens(conversation.contact_inbox)
 
-    broadcast(account, tokens, CONVERSATION_STATUS_CHANGED, conversation.push_event_data)
+    broadcast(account, tokens, CONVERSATION_STATUS_CHANGED, conversation.push_event_data(false))
   end
 
   def conversation_updated(event)
     conversation, account = extract_conversation_and_account(event)
     tokens = user_tokens(account, conversation.inbox.members) + contact_inbox_tokens(conversation.contact_inbox)
 
-    broadcast(account, tokens, CONVERSATION_UPDATED, conversation.push_event_data)
+    broadcast(account, tokens, CONVERSATION_UPDATED, conversation.push_event_data(false))
   end
 
   def conversation_typing_on(event)
@@ -78,8 +78,8 @@ class ActionCableListener < BaseListener
       account,
       tokens,
       CONVERSATION_TYPING_ON,
-      conversation: conversation.push_event_data,
-      user: user.push_event_data,
+      conversation: conversation.push_event_data(false),
+      user: user.push_event_data(true, true),
       is_private: event.data[:is_private] || false
     )
   end
@@ -94,8 +94,8 @@ class ActionCableListener < BaseListener
       account,
       tokens,
       CONVERSATION_TYPING_OFF,
-      conversation: conversation.push_event_data,
-      user: user.push_event_data,
+      conversation: conversation.push_event_data(false),
+      user: user.push_event_data(true, true),
       is_private: event.data[:is_private] || false
     )
   end
@@ -104,21 +104,21 @@ class ActionCableListener < BaseListener
     conversation, account = extract_conversation_and_account(event)
     tokens = user_tokens(account, conversation.inbox.members)
 
-    broadcast(account, tokens, ASSIGNEE_CHANGED, conversation.push_event_data)
+    broadcast(account, tokens, ASSIGNEE_CHANGED, conversation.push_event_data(false))
   end
 
   def team_changed(event)
     conversation, account = extract_conversation_and_account(event)
     tokens = user_tokens(account, conversation.inbox.members)
 
-    broadcast(account, tokens, TEAM_CHANGED, conversation.push_event_data)
+    broadcast(account, tokens, TEAM_CHANGED, conversation.push_event_data(false))
   end
 
   def conversation_contact_changed(event)
     conversation, account = extract_conversation_and_account(event)
     tokens = user_tokens(account, conversation.inbox.members)
 
-    broadcast(account, tokens, CONVERSATION_CONTACT_CHANGED, conversation.push_event_data)
+    broadcast(account, tokens, CONVERSATION_CONTACT_CHANGED, conversation.push_event_data(false))
   end
 
   def contact_created(event)
@@ -153,7 +153,7 @@ class ActionCableListener < BaseListener
     conversation, account = extract_conversation_and_account(event)
     user = event.data[:user]
 
-    broadcast(account, [user.pubsub_token], CONVERSATION_MENTIONED, conversation.push_event_data)
+    broadcast(account, [user.pubsub_token], CONVERSATION_MENTIONED, conversation.push_event_data(false))
   end
 
   private

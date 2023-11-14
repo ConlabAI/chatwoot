@@ -126,25 +126,47 @@ class User < ApplicationRecord
     super(options).merge(confirmed: confirmed?)
   end
 
-  def push_event_data
+  def push_event_data(anonymize = true, force = false)
     {
       id: id,
-      name: name,
-      available_name: available_name,
-      avatar_url: avatar_url,
+      name: anonymize ? anonymized_name(force) : name,
+      available_name: anonymize ? anonymized_available_name(force): available_name,
+      avatar_url: anonymize ? anonymized_avatar_url(force) : avatar_url,
       type: 'user',
       availability_status: availability_status,
-      thumbnail: avatar_url
+      thumbnail: anonymize ? anonymized_avatar_url(force): avatar_url,
     }
   end
 
   def webhook_data
     {
       id: id,
-      name: name,
-      email: email,
+      name: anonymized_name,
+      email: anonymized_email,
       type: 'user'
     }
+  end
+
+  def anonymized_name(force_anonymize = false)
+    return '' if name.blank?
+
+    force_anonymize || anonymize? ? Anonymization.anonymize_name(id) : name
+  end
+
+  def anonymized_available_name(force_anonymize = false)
+    return '' if available_name.blank?
+
+    force_anonymize || anonymize? ? Anonymization.anonymize_name(id) : available_name
+  end
+
+  def anonymized_email(force_anonymize = false)
+    return '' if email.blank?
+
+    force_anonymize || anonymize? ? Anonymization.anonymize_email(email, id) : email
+  end
+
+  def anonymized_avatar_url(force_anonymize = false)
+    force_anonymize || anonymize? ? Anonymization.anonymize_avatar_url(id) : avatar_url
   end
 
   # https://github.com/lynndylanhurley/devise_token_auth/blob/6d7780ee0b9750687e7e2871b9a1c6368f2085a9/app/models/devise_token_auth/concerns/user.rb#L45
@@ -164,6 +186,10 @@ class User < ApplicationRecord
 
   def remove_macros
     macros.personal.destroy_all
+  end
+
+  def anonymize?
+    !!account&.anonymized
   end
 end
 

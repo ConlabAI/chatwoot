@@ -13,7 +13,7 @@ module Anonymization
     Array.new(phone.length) { rng.rand(10).to_s }.join
   end
 
-  def self.anonymize_name(name, user_id)
+  def self.anonymize_name(user_id)
     Faker::Config.locale = 'ru'
     Faker::Config.random = Random.new(Digest::MD5.hexdigest(user_id.to_s).to_i(16))
 

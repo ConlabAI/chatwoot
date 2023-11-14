@@ -172,16 +172,16 @@ class Conversation < ApplicationRecord
     messages.incoming.unread_since(agent_last_seen_at)
   end
 
-  def push_event_data
-    Conversations::EventDataPresenter.new(self).push_data
+  def push_event_data(anonymize = true)
+    Conversations::EventDataPresenter.new(self).push_data(anonymize)
   end
 
   def lock_event_data
     Conversations::EventDataPresenter.new(self).lock_data
   end
 
-  def webhook_data
-    Conversations::EventDataPresenter.new(self).push_data
+  def webhook_data(anonymize = true)
+    Conversations::EventDataPresenter.new(self).push_data(anonymize)
   end
 
   def notifiable_assignee_change?
