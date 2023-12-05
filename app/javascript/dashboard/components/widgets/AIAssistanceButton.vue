@@ -1,6 +1,7 @@
 <template>
   <div v-if="isAIIntegrationEnabled" class="position-relative">
     <div v-if="!message">
+      <!-- Conlab: disable summary button as it's not implemented in Assistant -->
       <woot-button
         v-if="isPrivateNote"
         v-tooltip.top-end="$t('INTEGRATION_SETTINGS.OPEN_AI.SUMMARY_TITLE')"
@@ -9,6 +10,7 @@
         variant="smooth"
         size="small"
         :is-loading="uiFlags.summarize"
+        :disabled="true"
         @click="processEvent('summarize')"
       />
       <woot-button
@@ -24,6 +26,16 @@
     </div>
 
     <div v-else>
+      <!-- Conlab: show repply suggestion button to regenerate repply -->
+      <woot-button
+        v-tooltip.top-end="$t('INTEGRATION_SETTINGS.OPEN_AI.REPLY_TITLE')"
+        icon="wand"
+        color-scheme="secondary"
+        variant="smooth"
+        size="small"
+        :is-loading="uiFlags.reply_suggestion"
+        @click="processEvent('reply_suggestion')"
+      /> <!-- Conlab: Disable rephrasing as it's not implemented in Assistant
       <woot-button
         v-tooltip.top-end="$t('INTEGRATION_SETTINGS.OPEN_AI.TITLE')"
         icon="text-grammar-wand"
@@ -31,7 +43,7 @@
         variant="smooth"
         size="small"
         @click="toggleDropdown"
-      />
+      /> -->
       <div
         v-if="showDropdown"
         v-on-clickaway="closeDropdown"
