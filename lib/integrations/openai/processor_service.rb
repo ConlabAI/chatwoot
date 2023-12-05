@@ -110,9 +110,12 @@ class Integrations::Openai::ProcessorService
     {
       model: gpt_model,
       messages: [
-        { role: 'system',
-          content: 'Please suggest a reply to the following conversation between support agents and customer. Reply in the user\'s language.' }
-      ].concat(conversation_messages(in_array_format: true))
+        # Conlab note: Do not include the system message, as it will be added by the Assistant
+        # { role: 'system',
+        #   content: 'Please suggest a reply to the following conversation between support agents and customer. Reply in the user\'s language.' }
+      ].concat(conversation_messages(in_array_format: true)),
+      # Conlab: Pass conversation id as user to match traces with conversations
+      user: event['data']['conversation_display_id'].to_s
     }.to_json
   end
 
