@@ -59,8 +59,9 @@ RSpec.describe Integrations::Openai::ProcessorService do
             #  content: 'Please suggest a reply to the following conversation between support agents and customer. Reply in the user\'s language.' },
             { role: 'user', content: customer_message.content },
             { role: 'assistant', content: agent_message.content }
-          ]
-        }.to_json
+          ],
+          'user' => event['data']['conversation_display_id'].to_s
+        }.to_json 
 
         # Update the stub_request with the correct messages order
         stub_request(:post, 'https://api.openai.com/v1/chat/completions')
