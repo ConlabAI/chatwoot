@@ -44,10 +44,29 @@ export const clearLocalStorageOnLogout = () => {
 };
 
 export const deleteIndexedDBOnLogout = async () => {
-  const dbs = await window.indexedDB.databases();
-  dbs.forEach(db => {
-    window.indexedDB.deleteDatabase(db.name);
+  let dbs = [];
+  try {
+    dbs = await window.indexedDB.databases();
+    dbs = dbs.map(db => db.name);
+  } catch (e) {
+    dbs = JSON.parse(localStorage.getItem('cw-idb-names') || '[]');
+  }
+
+  dbs.forEach(dbName => {
+    const deleteRequest = window.indexedDB.deleteDatabase(dbName);
+
+    deleteRequest.onerror = event => {
+      // eslint-disable-next-line no-console
+      console.error(`Error deleting database ${dbName}.`, event);
+    };
+
+    deleteRequest.onsuccess = () => {
+      // eslint-disable-next-line no-console
+      console.log(`Database ${dbName} deleted successfully.`);
+    };
   });
+
+  localStorage.removeItem('cw-idb-names');
 };
 
 export const clearCookiesOnLogout = () => {
@@ -66,6 +85,9 @@ export const parseAPIErrorResponse = error => {
   }
   if (error?.response?.data?.error) {
     return error?.response?.data?.error;
+  }
+  if (error?.response?.data?.errors) {
+    return error?.response?.data?.errors[0];
   }
   return error;
 };
